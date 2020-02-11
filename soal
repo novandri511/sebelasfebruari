@@ -1,3 +1,36 @@
+//NOMOR2
+using System;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Nomor2
+{
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var result = await Coba.GetPosts();
+            Console.WriteLine(result);
+        }
+    }
+    public static class Coba { 
+        public static async Task<List<MyDetail>> GetPosts()
+        {
+            var web = new HttpClient();
+            var hasil = await web.GetStringAsync("https://mul14.github.io/data/employees.json");
+            var myDetails = JsonConvert.DeserializeObject<List<MyDetail>>(hasil);
+            return myDetails;
+        }
+        public class MyDetail
+        {
+            public int id { get; set; }
+        }
+    }
+}
+
+
 //NOMOR3
 using System;
 using System.Collections.Generic;
